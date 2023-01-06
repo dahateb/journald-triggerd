@@ -14,7 +14,6 @@ struct JournalStreamBuilder<'a> {
 
 impl<'a> JournalStreamBuilder<'a> {
     pub fn new(reader: &'a mut JournalReader) -> Result<Self, Error> {
-        reader.seek(JournalSeek::Tail).expect("journal seek failed");
         Ok(Self { reader })
     }
 
@@ -37,6 +36,7 @@ impl<'a> JournalStreamBuilder<'a> {
         &'a mut self,
     ) -> impl Stream<Item = Result<Option<JournalEntry>, Error>> + 'a {
         try_stream! {
+            self.reader.seek(JournalSeek::Tail).expect("journal seek failed");
             loop {
                 yield self.next_wait().unwrap();
             }
@@ -65,8 +65,8 @@ impl JournalParser {
 
         while let Some(value) = stream.next().await {
             if value.as_ref().unwrap().is_some() {
-                self.event_handler.handle(&value.unwrap().unwrap()).await;   
-            }                   
+                self.event_handler.handle(&value.unwrap().unwrap()).await;
+            }
         }
     }
 }
