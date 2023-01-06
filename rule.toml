@@ -1,0 +1,7 @@
+[[rule]]
+filter = "hallo"
+trigger = "touch hallo"
+
+[[rule]]
+filter = "hello"
+trigger = "touch hello"
