@@ -1,6 +1,8 @@
 [package]
 name = "rust-journal-triggerd"
-version = "0.1.0"
+authors  = ["https://github.com/dahateb"]
+description = "Trigger Handler for journald - Trigger commands from events matching journald loglines"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -15,3 +17,4 @@ async-trait = "0.1"
 toml = "0.5"
 serde = { version = "1.0", features = ["derive"] }
 serde_derive = "1.0"
+clap = { version = "4.0", features = ["derive"] }

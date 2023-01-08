@@ -24,7 +24,7 @@ impl EventHandler for JournalEventHandler {
     type Event = JournalEntry;
 
     async fn handle(&self, event: &Self::Event) {
-        let mut counter = 0;
+        let counter;
         {
             *self.counter.lock().as_deref_mut().unwrap() += 1;
             counter = *self.counter.lock().unwrap();
